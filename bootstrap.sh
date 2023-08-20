@@ -74,7 +74,7 @@ function install_terraform() {
     sudo tee /etc/apt/sources.list.d/hashicorp.list
 
   sudo apt-get update
-  sudo apt-get install -y terraform
+  sudo NEEDRESTART_MODE=a apt-get install -y terraform
 }
 
 function clone_source_repo() {
@@ -92,7 +92,6 @@ function clone_config_repo() {
 }
 
 function main() {
-  set -x;
   init_directories
   update_system
   install_dependencies
@@ -100,7 +99,6 @@ function main() {
   install_terraform
   clone_source_repo
   clone_config_repo
-  set +x;
 }
 
 main "$@"
