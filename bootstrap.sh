@@ -21,13 +21,13 @@ function update_system() {
   sudo apt-get update
 
   # Upgrade packages
-  sudo apt-get upgrade -y
+  sudo NEEDRESTART_MODE=a apt-get upgrade -y
 }
 
 function install_dependencies() {
   # Install prerequisite packages
   sudo apt-get update
-  sudo apt-get install -y \
+  sudo NEEDRESTART_MODE=a apt-get install -y \
     ca-certificates \
     curl \
     git \
