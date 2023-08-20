@@ -30,6 +30,7 @@ function install_dependencies() {
   sudo apt-get install -y \
     ca-certificates \
     curl \
+    git \
     git-crypt \
     gnupg \
     lsb-release \
@@ -76,10 +77,19 @@ function install_terraform() {
   sudo apt-get install -y terraform
 }
 
-function clone_repo() {
-  sudo mkdir -p "$HOME_STACK_SOURCE"
-  sudo chown "ha:ha" "$HOME_STACK_SOURCE"
-  sudo -u ha git clone "https://github.com/lukiffer/home-stack.git" "$HOME_STACK_SOURCE"
+function clone_source_repo() {
+  sudo git clone "https://github.com/lukiffer/home-stack.git" "$HOME_STACK_SOURCE"
+}
+
+function clone_config_repo() {
+  echo "Enter the git URI of the configuration repository (press enter for none):"
+  read -r git_uri
+
+  if [ -n "$git_uri" ]; then
+    sudo git clone "$git_uri" "$HOME_STACK_CONFIG"
+  else
+    echo "No git URI supplied for a configuration repository. Empty config will be used."
+  fi
 }
 
 function main() {
@@ -89,7 +99,8 @@ function main() {
   install_dependencies
   install_sops
   install_terraform
-  clone_repo
+  clone_source_repo
+  clone_config_repo
   set +x;
 }
 
