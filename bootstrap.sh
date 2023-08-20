@@ -87,6 +87,10 @@ function clone_config_repo() {
 
   if [ -n "$git_uri" ]; then
     git clone "$git_uri" "$HOME_STACK_CONFIG"
+    if test -f "$HOME_STACK_CONFIG/init.sh"; then
+      echo "Configuration initialization script exists. Executing it."
+      bash "$HOME_STACK_CONFIG/init.sh"
+    fi
   else
     echo "No git URI supplied for a configuration repository. Empty config will be used."
   fi
