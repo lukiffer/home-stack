@@ -82,8 +82,7 @@ function clone_source_repo() {
 }
 
 function clone_config_repo() {
-  echo "Enter the git URI of the configuration repository (press enter for none):"
-  read -r git_uri
+  read -rp "Enter the git URI of the configuration repository (press enter for none): " git_uri </dev/tty
 
   if [ -n "$git_uri" ]; then
     sudo git clone "$git_uri" "$HOME_STACK_CONFIG"

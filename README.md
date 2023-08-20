@@ -19,4 +19,5 @@ Running this script installs all of the prerequisites for running Home Stack on 
 
 The installation will prompt you for the git URI of the configuration repository.
 
-We recommend using `https://<username>@github.com/<username>/<repository_name>.git`.
+We recommend using `https://<username>@github.com/<username>/<repository_name>.git` – remember to supply your GitHub
+personal access token rather than your account password when prompted (see https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls).
