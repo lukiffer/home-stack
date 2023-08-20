@@ -44,7 +44,7 @@ function install_k0s() {
   sudo k0s start
 
   # Create a user Terraform will use to provision pods and services
-  sudo k0s kubeconfig create --groups "system:masters" ha | sudo tee "$HOME_STACK_CONFIG/k0s.config"
+  sudo k0s kubeconfig create --groups "system:masters" ha | sudo tee "$HOME_STACK_ROOT/k0s.config"
 
   # Create a roleBinding to grant the user access to the resources
   sudo k0s kubectl create clusterrolebinding --kubeconfig k0s.config ha-admin-binding --clusterrole=admin --user=ha
