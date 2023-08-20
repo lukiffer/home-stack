@@ -91,12 +91,17 @@ function clone_config_repo() {
   fi
 }
 
+function deploy_infrastructure() {
+  echo "test"
+}
+
 function main() {
   init_directories
   update_system
   install_dependencies
   install_sops
   install_terraform
+  install_k0s
   clone_source_repo
   clone_config_repo
 }
