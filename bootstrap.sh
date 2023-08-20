@@ -43,6 +43,7 @@ function install_k0s() {
   curl -sSLf https://get.k0s.sh | sudo sh
   sudo k0s install controller --single
   sudo k0s start
+  sudo k0s status
 
   # Create a user Terraform will use to provision pods and services
   sudo k0s kubeconfig create --groups "system:masters" ha | sudo -E tee "$HOME_STACK_ROOT/k0s.config"
@@ -62,7 +63,7 @@ function install_sops() {
 }
 
 function install_terraform() {
-  wget -O- https://apt.releases.hashicorp.com/gpg | \
+  curl -fsSL https://apt.releases.hashicorp.com/gpg | \
     gpg --dearmor | \
     sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
 
@@ -79,7 +80,7 @@ function install_terraform() {
 }
 
 function clone_source_repo() {
-  sudo git clone "https://github.com/lukiffer/home-stack.git" "$HOME_STACK_SOURCE"
+  git clone "https://github.com/lukiffer/home-stack.git" "$HOME_STACK_SOURCE"
 }
 
 function clone_config_repo() {
