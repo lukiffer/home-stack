@@ -5,9 +5,9 @@ HOME_STACK_SOURCE="$HOME_STACK_ROOT/source"
 HOME_STACK_CONFIG="$HOME_STACK_ROOT/config"
 
 function init_directories() {
-  mkdir -p "$HOME_STACK_ROOT"
-  mkdir -p "$HOME_STACK_SOURCE"
-  mkdir -p "$HOME_STACK_CONFIG"
+  sudo mkdir -p "$HOME_STACK_ROOT"
+  sudo mkdir -p "$HOME_STACK_SOURCE"
+  sudo mkdir -p "$HOME_STACK_CONFIG"
 }
 
 function get_latest_git_release() {
