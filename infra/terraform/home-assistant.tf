@@ -10,6 +10,10 @@ module "home_assistant" {
     stack = "home-stack"
   }
 
+  env = {
+    DISABLE_JEMALLOC = "true",
+  }
+
   container_port = 8123
   node_port      = local.home_assistant_node_port
 

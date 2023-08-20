@@ -51,11 +51,11 @@ resource "kubernetes_deployment" "deployment" {
           }
 
           dynamic "env" {
-            for_each = coalesce(var.env, [])
+            for_each = nonsensitive(toset(keys(var.env)))
 
             content {
-              name  = env.value.name
-              value = env.value.value
+              name  = each.key
+              value = each.value
             }
           }
 

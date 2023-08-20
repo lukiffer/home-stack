@@ -49,13 +49,10 @@ variable "node_port" {
 }
 
 variable "env" {
-  description = "A list of environment variable key/value pairs."
+  description = "A map of environment variables."
   sensitive   = true
-  type = set(object({
-    name  = string,
-    value = string,
-  }))
-  default = []
+  type        = map(string)
+  default     = {}
 }
 
 variable "config_mount_path" {

@@ -10,20 +10,12 @@ module "mariadb" {
     stack = "home-stack"
   }
 
-  env = [
-    {
-      name  = "MYSQL_USER",
-      value = local.secrets.mariadb_username,
-    },
-    {
-      name  = "MYSQL_PASSWORD",
-      value = local.secrets.mariadb_password,
-    },
-    {
-      name  = "MYSQL_ROOT_PASSWORD",
-      value = local.secrets.mariadb_root_password,
-    }
-  ]
+  env = {
+    MYSQL_USER          = local.secrets.mariadb_username,
+    MYSQL_PASSWORD      = local.secrets.mariadb_password
+    MYSQL_ROOT_PASSWORD = local.secrets.mariadb_root_password,
+    MYSQL_DATABASE      = "homeassistant",
+  }
 
   container_port = 3306
   node_port      = local.mariadb_node_port
