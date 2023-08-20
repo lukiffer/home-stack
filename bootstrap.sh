@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-HOME_STACK_ROOT="/opt/home-stack"
-HOME_STACK_SOURCE="$HOME_STACK_ROOT/source"
-HOME_STACK_CONFIG="$HOME_STACK_ROOT/config"
+export HOME_STACK_ROOT="/opt/home-stack"
+export HOME_STACK_SOURCE="$HOME_STACK_ROOT/source"
+export HOME_STACK_CONFIG="$HOME_STACK_ROOT/config"
 
 function init_directories() {
   sudo mkdir -p "$HOME_STACK_ROOT"
@@ -45,7 +45,7 @@ function install_k0s() {
   sudo k0s start
 
   # Create a user Terraform will use to provision pods and services
-  sudo k0s kubeconfig create --groups "system:masters" ha | sudo tee "$HOME_STACK_ROOT/k0s.config"
+  sudo k0s kubeconfig create --groups "system:masters" ha | sudo -E tee "$HOME_STACK_ROOT/k0s.config"
 
   # Create a roleBinding to grant the user access to the resources
   sudo k0s kubectl create clusterrolebinding --kubeconfig k0s.config ha-admin-binding --clusterrole=admin --user=ha
