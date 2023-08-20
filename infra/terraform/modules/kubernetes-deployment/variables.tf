@@ -65,9 +65,3 @@ variable "local_config_path" {
   description = "The node-local path where the config volume will be stored."
   type        = string
 }
-
-variable "post_start_command" {
-  description = "A segmented command to run on the container after it is started."
-  type        = list(string)
-  default     = null
-}

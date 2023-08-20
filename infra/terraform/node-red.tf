@@ -3,15 +3,7 @@ module "node_red" {
 
   name            = "node-red"
   namespace       = resource.kubernetes_namespace.namespace.metadata[0].name
-  container_image = "nodered/node-red:latest"
-
-  post_start_command = [
-    "npm",
-    "install",
-    "node-red-contrib-stoptimer",
-    "node-red-contrib-time-range-switch",
-    "node-red-contrib-home-assistant-websocket",
-  ]
+  container_image = "lukiffer/node-red-home-assistant:latest"
 
   labels = {
     app   = "node-red"
