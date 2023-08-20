@@ -40,16 +40,17 @@ variable "container_args" {
 
 variable "container_port" {
   description = "The port exposed by the container that will be proxied by the service."
-  type = number
+  type        = number
 }
 
 variable "node_port" {
   description = "The port exposed by the node to the ingress."
-  type = number
+  type        = number
 }
 
 variable "env" {
   description = "A list of environment variable key/value pairs."
+  sensitive   = true
   type = set(object({
     name  = string,
     value = string,
@@ -66,4 +67,10 @@ variable "config_mount_path" {
 variable "local_config_path" {
   description = "The node-local path where the config volume will be stored."
   type        = string
+}
+
+variable "post_start_command" {
+  description = "A segmented command to run on the container after it is started."
+  type        = list(string)
+  default     = null
 }

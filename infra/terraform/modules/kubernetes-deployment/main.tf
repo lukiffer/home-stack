@@ -58,6 +58,18 @@ resource "kubernetes_deployment" "deployment" {
               value = env.value.value
             }
           }
+
+          dynamic "lifecycle" {
+            for_each = var.post_start_command == null ? [] : [1]
+
+            content {
+              post_start {
+                exec {
+                  command = var.post_start_command
+                }
+              }
+            }
+          }
         }
 
         volume {

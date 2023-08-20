@@ -3,7 +3,7 @@ module "home_assistant" {
 
   name            = "home-assistant"
   namespace       = resource.kubernetes_namespace.namespace.metadata[0].name
-  container_image = "homeassistant/home-assistant"
+  container_image = "homeassistant/home-assistant:stable"
 
   labels = {
     app   = "home-assistant"
