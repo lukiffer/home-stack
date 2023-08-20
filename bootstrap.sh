@@ -8,6 +8,7 @@ function init_directories() {
   sudo mkdir -p "$HOME_STACK_ROOT"
   sudo mkdir -p "$HOME_STACK_SOURCE"
   sudo mkdir -p "$HOME_STACK_CONFIG"
+  sudo chown -R "$USER:$USER" "$HOME_STACK_ROOT"
 }
 
 function get_latest_git_release() {
@@ -85,14 +86,17 @@ function clone_config_repo() {
   read -rp "Enter the git URI of the configuration repository (press enter for none): " git_uri </dev/tty
 
   if [ -n "$git_uri" ]; then
-    sudo git clone "$git_uri" "$HOME_STACK_CONFIG"
+    git clone "$git_uri" "$HOME_STACK_CONFIG"
   else
     echo "No git URI supplied for a configuration repository. Empty config will be used."
   fi
 }
 
 function deploy_infrastructure() {
-  echo "test"
+  pushd "$HOME_STACK_SOURCE/infra/terraform/" || exit 1
+    terraform init
+    terraform apply -auto-approve
+  popd || exit 1
 }
 
 function main() {
