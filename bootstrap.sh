@@ -97,10 +97,10 @@ function clone_config_repo() {
 }
 
 function deploy_infrastructure() {
-  pushd "$HOME_STACK_SOURCE/infra/terraform/" || exit 1
+  pushd "$HOME_STACK_SOURCE/infra/terraform/" || exit 1 > /dev/null
     terraform init
     terraform apply -auto-approve
-  popd || exit 1
+  popd || exit 1 > /dev/null
 }
 
 function main() {
@@ -112,6 +112,7 @@ function main() {
   install_k0s
   clone_source_repo
   clone_config_repo
+  deploy_infrastructure
 }
 
 main "$@"
