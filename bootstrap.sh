@@ -43,7 +43,9 @@ function install_k0s() {
   curl -sSLf https://get.k0s.sh | sudo sh
   sudo k0s install controller --single
   sudo k0s start
-  sudo k0s status
+
+  # Wait for the cluster to be ready for kubeconfig/kubectl commands
+  until sudo k0s status | grep -m 1 "Kube-api probing successful: true"; do : sleep 1; done;
 
   # Create a user Terraform will use to provision pods and services
   sudo k0s kubeconfig create --groups "system:masters" ha | sudo -E tee "$HOME_STACK_ROOT/k0s.config"
@@ -65,7 +67,7 @@ function install_sops() {
 function install_terraform() {
   curl -fsSL https://apt.releases.hashicorp.com/gpg | \
     gpg --dearmor | \
-    sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
 
   gpg --no-default-keyring \
     --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg \
