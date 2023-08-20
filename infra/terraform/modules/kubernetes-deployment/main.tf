@@ -54,8 +54,8 @@ resource "kubernetes_deployment" "deployment" {
             for_each = nonsensitive(toset(keys(var.env)))
 
             content {
-              name  = each.key
-              value = each.value
+              name  = env.key
+              value = var.env[env.key]
             }
           }
 
