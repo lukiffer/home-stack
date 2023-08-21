@@ -91,6 +91,7 @@ resource "kubernetes_deployment" "deployment" {
         dynamic "volume" {
           for_each = var.host_device_mounts
           content {
+            name = volume.value
             host_path {
               path = volume.value
             }
