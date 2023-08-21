@@ -65,3 +65,15 @@ variable "local_config_path" {
   description = "The node-local path where the config volume will be stored."
   type        = string
 }
+
+variable "privileged" {
+  description = "Whether or not to run the container with a privileged security context."
+  type        = bool
+  default     = false
+}
+
+variable "host_device_mounts" {
+  description = "A list of host devices to mount in the container. Requireds privileged security context."
+  type        = set(string)
+  default     = []
+}

@@ -46,8 +46,23 @@ resource "kubernetes_deployment" "deployment" {
             mount_path = var.config_mount_path
           }
 
+          dynamic "volume_mount" {
+            for_each = var.host_device_mounts
+            content {
+              name       = volume_mount.value
+              mount_path = volume_mount.value
+            }
+          }
+
           port {
             container_port = var.container_port
+          }
+
+          dynamic "security_context" {
+            for_each = var.privileged == true ? [1] : []
+            content {
+              privileged = true
+            }
           }
 
           dynamic "env" {
@@ -70,6 +85,15 @@ resource "kubernetes_deployment" "deployment" {
           # strategy then.
           host_path {
             path = var.local_config_path
+          }
+        }
+
+        dynamic "volume" {
+          for_each = var.host_device_mounts
+          content {
+            host_path {
+              path = volume.value
+            }
           }
         }
       }
