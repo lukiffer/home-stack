@@ -49,7 +49,7 @@ resource "kubernetes_deployment" "deployment" {
           dynamic "volume_mount" {
             for_each = var.host_device_mounts
             content {
-              name       = replace(replace(volume_mount.value, "/^\\//", ""), "/", "-")
+              name       = lower(replace(replace(volume_mount.value, "/^\\//", ""), "/", "-"))
               mount_path = volume_mount.value
             }
           }
@@ -91,7 +91,7 @@ resource "kubernetes_deployment" "deployment" {
         dynamic "volume" {
           for_each = var.host_device_mounts
           content {
-            name = replace(replace(volume.value, "/^\\//", ""), "/", "-")
+            name = lower(replace(replace(volume.value, "/^\\//", ""), "/", "-"))
             host_path {
               path = volume.value
             }
