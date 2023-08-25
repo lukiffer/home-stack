@@ -1,3 +1,9 @@
+terraform {
+  backend "local" {
+    path = "/opt/home-stack/config/terraform.tfstate"
+  }
+}
+
 locals {
   # Kubernetes variables
   kubernetes_namespace     = "home-automation"
@@ -14,6 +20,7 @@ locals {
   home_assistant_node_port = 30000
   mariadb_node_port        = 30100
   node_red_node_port       = 30200
+  zwave_js_port            = 30210
   grafana_node_port        = 30300
 }
 
