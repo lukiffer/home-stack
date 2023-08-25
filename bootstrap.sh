@@ -45,7 +45,7 @@ function install_k0s() {
   sudo k0s start
 
   # Wait for the cluster to be ready for kubeconfig/kubectl commands
-  until sudo k0s status | grep -m 1 "Kube-api probing successful: true"; do : sleep 1; done;
+  until sudo k0s status | grep -m 1 "Kube-api probing successful: true" > /dev/null; do : sleep 1; done;
 
   # Create a user Terraform will use to provision pods and services
   sudo k0s kubeconfig create --groups "system:masters" ha | sudo -E tee "$HOME_STACK_ROOT/k0s.config"
@@ -56,7 +56,7 @@ function install_k0s() {
 
 function install_sops() {
   # Install SOPS
-  local -r sops_repo="https://github.com/mozilla/sops"
+  local -r sops_repo="https://github.com/getsops/sops"
   local -r sops_version=$(get_latest_git_release "$sops_repo")
 
   sudo curl -fsSL "$sops_repo/releases/download/$sops_version/sops_${sops_version/v/}_$(dpkg --print-architecture).deb" -o sops.deb
