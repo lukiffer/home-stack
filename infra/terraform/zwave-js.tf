@@ -4,6 +4,7 @@ module "zwave_js" {
   name            = "zwave-js"
   namespace       = resource.kubernetes_namespace.namespace.metadata[0].name
   container_image = "zwavejs/zwave-js-ui:latest"
+  privileged      = true
 
   labels = {
     app   = "zwave-js"
