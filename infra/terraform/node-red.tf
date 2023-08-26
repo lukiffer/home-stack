@@ -14,8 +14,11 @@ module "node_red" {
     NODE_RED_CREDENTIAL_SECRET = local.secrets.node_red_credential_secret,
   }
 
-  container_port = 1880
-  node_port      = local.node_red_node_port
+  ports = [{
+    name           = "node-red-http"
+    container_port = 1880,
+    node_port      = local.node_red_node_port,
+  }]
 
   local_config_path = "${local.home_stack_config}/node-red/"
   config_mount_path = "/data/"

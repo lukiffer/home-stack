@@ -54,8 +54,11 @@ resource "kubernetes_deployment" "deployment" {
             }
           }
 
-          port {
-            container_port = var.container_port
+          dynamic "port" {
+            for_each = var.ports
+            content {
+              container_port = port.value.container_port
+            }
           }
 
           dynamic "security_context" {
@@ -118,11 +121,14 @@ resource "kubernetes_service" "service" {
     type     = "NodePort"
     selector = var.labels
 
-    port {
-      name        = "${var.name}-service-port"
-      port        = var.container_port
-      target_port = var.container_port
-      node_port   = var.node_port
+    dynamic "port" {
+      for_each = var.ports
+      content {
+        name        = port.value.name
+        port        = port.value.container_port
+        target_port = port.value.container_port
+        node_port   = port.value.node_port
+      }
     }
   }
 }

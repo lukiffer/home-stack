@@ -20,7 +20,8 @@ locals {
   home_assistant_node_port = 30000
   mariadb_node_port        = 30100
   node_red_node_port       = 30200
-  zwave_js_port            = 30210
+  zwave_js_http_node_port  = 30210
+  zwave_js_ws_node_port    = 30211
   grafana_node_port        = 30300
 }
 

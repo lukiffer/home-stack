@@ -17,8 +17,11 @@ module "mariadb" {
     MYSQL_DATABASE      = "homeassistant",
   }
 
-  container_port = 3306
-  node_port      = local.mariadb_node_port
+  ports = [{
+    name           = "mariadb-mysql",
+    container_port = 3306,
+    node_port      = local.mariadb_node_port,
+  }]
 
   local_config_path = "${local.home_stack_config}/mariadb/"
   config_mount_path = "/var/lib/mysql"

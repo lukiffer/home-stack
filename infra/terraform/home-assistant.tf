@@ -15,8 +15,11 @@ module "home_assistant" {
     DISABLE_JEMALLOC = "true",
   }
 
-  container_port = 8123
-  node_port      = local.home_assistant_node_port
+  ports = [{
+    name           = "home-assistant-http",
+    container_port = 8123
+    node_port      = local.home_assistant_node_port
+  }]
 
   local_config_path = "${local.home_stack_config}/home-assistant/"
 

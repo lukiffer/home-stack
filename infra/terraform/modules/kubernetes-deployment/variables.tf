@@ -38,14 +38,14 @@ variable "container_args" {
   default     = []
 }
 
-variable "container_port" {
-  description = "The port exposed by the container that will be proxied by the service."
-  type        = number
-}
-
-variable "node_port" {
-  description = "The port exposed by the node to the ingress."
-  type        = number
+variable "ports" {
+  description = "A list of port map objects that are exposed by the service."
+  type = set(object({
+    name           = string,
+    container_port = number,
+    node_port      = number,
+  }))
+  default = []
 }
 
 variable "env" {
