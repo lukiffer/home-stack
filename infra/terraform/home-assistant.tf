@@ -21,7 +21,6 @@ module "home_assistant" {
   local_config_path = "${local.home_stack_config}/home-assistant/"
 
   host_device_mounts = [
-    "/dev/ttyUSB0",
     "/dev/ttyUSB1",
   ]
 }

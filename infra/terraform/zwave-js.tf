@@ -15,4 +15,8 @@ module "zwave_js" {
 
   local_config_path = "${local.home_stack_config}/zwave-js/"
   config_mount_path = "/usr/src/app/store/"
+
+  host_device_mounts = [
+    "/dev/ttyUSB0",
+  ]
 }
