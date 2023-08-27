@@ -17,5 +17,5 @@ module "nginx" {
   }]
 
   local_config_path = "${local.home_stack_config}/nginx/nginx.conf"
-  config_mount_path = "/etc/nginx/conf.d/site.conf"
+  config_mount_path = "/etc/nginx/nginx.conf"
 }
