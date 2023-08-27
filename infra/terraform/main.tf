@@ -23,6 +23,7 @@ locals {
   zwave_js_http_node_port  = 30210
   zwave_js_ws_node_port    = 30211
   grafana_node_port        = 30300
+  nginx_node_port          = 32767
 }
 
 resource "kubernetes_namespace" "namespace" {
