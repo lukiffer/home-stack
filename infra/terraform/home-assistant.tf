@@ -25,5 +25,6 @@ module "home_assistant" {
 
   host_device_mounts = [
     "/dev/ttyUSB1",
+    "/dev/ttyUSB2",
   ]
 }
