@@ -32,6 +32,12 @@ variable "container_image" {
   type        = string
 }
 
+variable "image_pull_policy" {
+  description = "The Kubernetes image pull policy name. One of `Always`, `Never`, or `IfNotPresent`."
+  type        = string
+  default     = "Always"
+}
+
 variable "container_args" {
   description = "A list of string arguments to be passed to the container."
   type        = list(string)

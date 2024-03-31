@@ -37,9 +37,10 @@ resource "kubernetes_deployment" "deployment" {
         termination_grace_period_seconds = var.termination_grace_period_seconds
 
         container {
-          name  = var.name
-          image = var.container_image
-          args  = var.container_args
+          name              = var.name
+          image             = var.container_image
+          args              = var.container_args
+          image_pull_policy = var.image_pull_policy
 
           volume_mount {
             name       = "${var.name}-config-volume"
