@@ -1,5 +1,8 @@
 # Home Stack
 
+A single-node home-automation stack: Ubuntu host bootstrap, k0s, and Terraform-managed Kubernetes workloads (Home Assistant, MariaDB, Node-RED, Z-Wave JS UI, Grafana, nginx).
+
+This repository was last changed in March 2024. See [MODERNIZATION.md](MODERNIZATION.md) for an inventory of stale versions, bootstrap bugs, and recommended work to bring it current.
 
 ## Bootstrapping the Host
 
