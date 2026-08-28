@@ -54,6 +54,12 @@ variable "ports" {
   default = []
 }
 
+variable "host_network" {
+  description = "Whether or not to attach the pod to the host network namespace rather than the pod network."
+  type        = bool
+  default     = false
+}
+
 variable "env" {
   description = "A map of environment variables."
   sensitive   = true

@@ -35,6 +35,10 @@ resource "kubernetes_deployment" "deployment" {
       spec {
         hostname                         = var.name
         termination_grace_period_seconds = var.termination_grace_period_seconds
+        host_network                     = var.host_network
+
+        # A host-network pod silently loses cluster DNS unless it is explicitly paired with this policy.
+        dns_policy = var.host_network ? "ClusterFirstWithHostNet" : "ClusterFirst"
 
         container {
           name              = var.name
