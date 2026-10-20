@@ -3,7 +3,7 @@ module "mariadb" {
 
   name            = "mariadb"
   namespace       = resource.kubernetes_namespace.namespace.metadata[0].name
-  container_image = "mariadb:latest"
+  container_image = "mariadb:lts"
 
   labels = {
     app   = "mariadb"
